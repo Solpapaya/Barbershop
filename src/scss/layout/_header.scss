@@ -1,0 +1,35 @@
+.header {
+    @include nineHundred {
+        padding-top: 0;
+    }
+
+    h1 {
+        margin-top: 0;
+    }
+
+    .nav {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        column-gap: $gap/5;
+
+        @include mobile {
+            column-gap: $gap/2;
+        }
+
+        .nav__item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: $black;
+            font-weight: $bold;
+            text-transform: uppercase;
+            background-color: $white;
+            padding: $gap/6 0;
+        }
+
+        .nav__item:first-child {
+            background-color: $blue;
+            color: $white;
+        }
+    }
+}

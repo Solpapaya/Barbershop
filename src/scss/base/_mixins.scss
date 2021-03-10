@@ -1,0 +1,17 @@
+@mixin nineHundred {
+    @media(min-width: 900px) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media(min-width: 768px) {
+        @content;
+    }
+}
+
+@mixin mobile {
+    @media(min-width: 480px) {
+        @content;
+    }
+}

@@ -1,3 +1,44 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
 html {
     font-size: 62.5%;
+}
+
+body {
+    font-size: 1.6rem;
+    font-family: $mainFont;
+    background-color: $brown;
+}
+
+h1 {
+    font-size: 4rem;
+}
+
+h2 {
+    font-size: 3.6rem;
+}
+
+h1,h2 {
+    text-align: center;
+    color: $blue;
+}
+
+.container {
+    max-width: 120rem;
+    width: 95%;
+    margin: 0 auto;
+}
+
+button {
+    border: none;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+img {
+    width: 100%;
 }

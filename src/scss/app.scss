@@ -1,1 +1,9 @@
+@import 'base/normalize';
+@import 'base/variables';
+@import 'base/mixins';
 @import 'base/globals';
+
+@import 'layout/mainContainer';
+@import 'layout/header';
+@import 'layout/main';
+@import 'layout/services';

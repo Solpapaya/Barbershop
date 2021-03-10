@@ -5,11 +5,48 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Barbershop</title>
-    <link rel="preload" href="build/css/app.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;700;900&display=swap" rel="stylesheet">
+    <link rel="preload" href="build/css/app.css" as="style">
     <link rel="stylesheet" href="build/css/app.css">
 </head>
 <body>
-    <h1>Barbershop</h1>
+    <div class="main-container">
+        <div class="main__img"></div>
+        <div class="main__content">
+            <div class="container">
+                <header class="header">
+                    <h1>Barbershop</h1>
+                    <nav class="nav">
+                        <button type="button" class="nav__item">Services</button>
+                        <button type="button" class="nav__item">Client Info</button>
+                        <button type="button" class="nav__item">Summary</button>
+                    </nav>
+                </header>
+    
+                <main class="main">
+                    <section class="section">
+                        <h2>Services</h2>
+                        <p>Choose the services that you want</p>
+                        <div class="list-services"></div>
+                        <div class="button-container">
+                            <button class="button">Next >></button>
+                        </div>
+                    </section>
+                    <section class="section">
+                        <h2>Client Info and Appointment</h2>
+                        <p>Please insert your info and the date you want to visit us :)</p>
+                        <div class="button-container">
+                            <button class="button">Next >></button>
+                        </div>
+                    </section>
+                    <section class="section">
+                        <p>Ups! You are missing data :(</p>
+                    </section>
+                </main>
+            </div>
+        </div>
+    </div>
 
     <script src="build/js/bundle.min.js"></script>
 </body>

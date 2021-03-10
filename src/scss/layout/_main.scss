@@ -1,0 +1,30 @@
+.section {
+    display: none;
+
+    &:first-of-type {
+        display: block;
+    }
+
+    p {
+        color: $white;
+        font-size: 2rem;
+        text-align: center;
+    }
+
+    .button-container {
+        display: flex;        
+        justify-content: flex-end;
+        margin-top: 2.68rem;
+    }
+
+    .button {
+        background-color: $blue;
+        text-align: center;
+        width: 30%;
+        color: $white;
+        font-weight: $bold;
+        text-transform: uppercase;
+        font-size: 2rem;
+        padding: $gap/6;
+    }
+}
