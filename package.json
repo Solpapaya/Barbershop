@@ -1,0 +1,32 @@
+{
+  "name": "barbershop",
+  "version": "1.0.0",
+  "description": "Barbershop Web Page",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Solpapaya/Barbershop.git"
+  },
+  "keywords": [
+    "Barbershop",
+    "Web-Design",
+    "SASS",
+    "JavaScript",
+    "PHP",
+    "MySQL",
+    "CSS",
+    "HTML"
+  ],
+  "author": "Daniel Rafael Solorio Paredes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Solpapaya/Barbershop/issues"
+  },
+  "homepage": "https://github.com/Solpapaya/Barbershop#readme",
+  "devDependencies": {
+    "gulp": "^4.0.2"
+  }
+}
