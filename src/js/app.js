@@ -6,7 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function startApp() {
     showServices();
-    showSection();    
+    createSectionBtn();
+    showFirstSection();
 }
 
 async function showServices() {
@@ -29,7 +30,13 @@ async function showServices() {
             serv.appendChild(servPrice);
             listServices.appendChild(serv);
 
-            serv.addEventListener('click', serviceSelected);
+            serv.addEventListener('click', (event) => {
+                if(event.currentTarget.classList.contains('selected')) {
+                    event.currentTarget.classList.remove('selected');
+                }else {
+                    event.currentTarget.classList.add('selected');
+                }
+            });
 
             serv.classList.add('service', 'unselectable');
             servName.classList.add('service__name');
@@ -44,27 +51,8 @@ async function showServices() {
     }
 }
 
-function serviceSelected(event) {
-    if(event.currentTarget.classList.contains('selected')) {
-        event.currentTarget.classList.remove('selected');
-    }else {
-        event.currentTarget.classList.add('selected');
-    }
-}
-
-function showSection() {
-    const navItems = document.querySelectorAll('.nav__item');
-    navItems[page - 1].classList.add('selected');
-
+function createSectionBtn() {
     const sections = document.querySelectorAll('section');
-    sections[page - 1].classList.add('selected');
-
-    // const currentSection = document.querySelector(`#section-${page}`);
-    // currentSection.classList.add('selected');
-
-    navItems.forEach((item) => {
-        item.addEventListener('click', sectionSelected);
-    });
 
     // Generate Button(s) in Section
     for(let i = 0; i < sections.length; i++) {
@@ -82,7 +70,7 @@ function showSection() {
             const btn = document.createElement('BUTTON');
             btn.textContent = 'Next >>';
             btn.classList.add('button');
-            btn.addEventListener('click', changePage);
+            btn.addEventListener('click', changeSection);
             btnContainer.appendChild(btn);
         }
 
@@ -96,46 +84,49 @@ function createBtn() {
     const btn = document.createElement('BUTTON');
     btn.textContent = '<< Previous';
     btn.classList.add('button');
-    btn.addEventListener('click', changePage);
+    btn.addEventListener('click', changeSection);
     btnContainer.appendChild(btn);
     return btnContainer;
 }
 
-function changePage(event) {
-    // console.log(event.currentTarget);
+function showFirstSection() {
+    const navItems = document.querySelectorAll('.nav__item');
+    navItems[page - 1].classList.add('selected');
+
+    const sections = document.querySelectorAll('section');
+    sections[page - 1].classList.add('selected');
+
+    navItems.forEach((item) => {
+        item.addEventListener('click', (event) => {
+            if(!event.currentTarget.classList.contains('selected')) {
+                page = event.currentTarget.dataset.section;
+                showSection();
+            }
+        });
+    });
+}
+
+function changeSection(event) {
     const btn = event.currentTarget;
-    // console.log(btn.textContent.toLowerCase().includes("next"));
     if(btn.textContent.toLowerCase().includes("next")) {
         page++;
     } else {
         page--;
     }
-    showPage();
+    showSection();
 }
 
-function showPage() {
+function showSection() {
     const previousSelectedTab = document.querySelector('.nav__item.selected');
     const previousSelectedSectionId = previousSelectedTab.dataset.section;
-            
     const previousSelectedSection = document.querySelector(`#section-${previousSelectedSectionId}`);
-}
 
-function sectionSelected(event) {
-    if(!event.currentTarget.classList.contains('selected')) {
-        const previousSelectedTab = document.querySelector('.nav__item.selected');
-        if(previousSelectedTab !== null) {
-            const previousSelectedSectionId = previousSelectedTab.dataset.section;
-            
-            const previousSelectedSection = document.querySelector(`#section-${previousSelectedSectionId}`);
+    previousSelectedTab.classList.remove('selected');
+    previousSelectedSection.classList.remove('selected');
 
-            previousSelectedTab.classList.remove('selected');
-            previousSelectedSection.classList.remove('selected');
+    const newSection = document.querySelector(`#section-${page}`);
+    const newTabSection = document.querySelector(`[data-section='${page}']`);
 
-            event.currentTarget.classList.add('selected');
-    
-            const newSectionId = event.currentTarget.dataset.section;
-            const newSelectedSection = document.querySelector(`#section-${newSectionId}`);
-            newSelectedSection.classList.add('selected');
-        }
-    }
+    newSection.classList.add('selected');
+    newTabSection.classList.add('selected');
 }
