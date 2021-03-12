@@ -7,6 +7,7 @@
 }
 
 .service {
+    background-color: $white;
     border-radius: 1rem;
     display: flex;
     flex-direction: column;
@@ -25,37 +26,28 @@
 
     
     .service__name {
+        color: $black;
         margin: 0;
     }
 
     .service__price {
+        color: $blue;
         font-weight: $bold;
         font-size: 3rem;
         margin-top: 1rem;
         margin-bottom: 0;
     }
-}
 
-.service--selected {
-    background-color: $blue;
-
-    .service__name {
-        color: $white;
-    }
-
-    .service__price {
-        color: $white;
-    }
-}
-
-.service--not-selected {
-    background-color: $white;
-
-    .service__name {
-        color: $black;
-    }
-
-    .service__price {
-        color: $blue;
+    &.selected {
+        background-color: $blue;
+    
+        .service__name {
+            color: $white;
+        }
+    
+        .service__price {
+            color: $white;
+        }
     }
 }
+

@@ -31,13 +31,17 @@ function css() {
 // Function that concatenates separate JavaScript files in one single file
 // here, the new file will be called 'bundle.js'
 function javaScript() {
-    return src(paths.js)
-      .pipe(sourcemaps.init())
-      .pipe(concat('bundle.js')) // final output file name
-      .pipe(terser())
-      .pipe(sourcemaps.write('.'))
-      .pipe(rename({ suffix: '.min' }))
-      .pipe(dest('./build/js'))
+    try{
+        return src(paths.js)
+          .pipe(sourcemaps.init())
+          .pipe(concat('bundle.js')) // final output file name
+          .pipe(terser())
+          .pipe(sourcemaps.write('.'))
+          .pipe(rename({ suffix: '.min' }))
+          .pipe(dest('./build/js'))
+    }catch(error) {
+        console.log(error);
+    }
 }
 
 // Function that minifies the images 

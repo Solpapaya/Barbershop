@@ -25,11 +25,16 @@
             text-transform: uppercase;
             background-color: $white;
             padding: $gap/6 0;
+
+            &.selected {
+                background-color: $blue;
+                color: $white;
+            }
         }
 
-        .nav__item:first-child {
-            background-color: $blue;
-            color: $white;
-        }
+        // .nav__item:first-child {
+        //     background-color: $blue;
+        //     color: $white;
+        // }
     }
 }
