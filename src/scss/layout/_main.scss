@@ -1,10 +1,6 @@
 .section {
     display: none;
 
-    // &:first-of-type {
-    //     display: block;
-    // }
-
     p {
         color: $white;
         font-size: 2rem;
@@ -32,12 +28,16 @@
     .button {
         background-color: $blue;
         text-align: center;
-        width: 30%;
+        width: 40%;
         color: $white;
         font-weight: $bold;
         text-transform: uppercase;
         font-size: 2rem;
         padding: $gap/6;
+
+        @include mobile {
+            width: 30%;
+        }
     }
 
     &.selected {

@@ -1,4 +1,4 @@
-let page = 1;
+let page = 2;
 
 document.addEventListener('DOMContentLoaded', () => {
     startApp();
@@ -8,6 +8,7 @@ function startApp() {
     showServices();
     createSectionBtn();
     showFirstSection();
+    formAnimations();
 }
 
 async function showServices() {
