@@ -1,4 +1,5 @@
 function formAnimations() {
+    // I have to add date input funcionality
     const timeLabel = document.querySelector('.field-date-time label');
     const timeInput = document.querySelector('.field-date-time input');
     
