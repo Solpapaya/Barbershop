@@ -19,7 +19,9 @@
         height: 100%;
         width: 100%;
         z-index: 1;
-        padding: 1.5rem 2rem;
+        padding: 0 2rem;
+        display: flex;
+        align-items: center;
         transition: 1s;
     }
 
@@ -30,13 +32,10 @@
         font-size: 1.2rem;
         font-weight: $bold;
         background-color: transparent;
-        padding-top: 1rem;
-        // background-color: red;
+        padding: 0;
         
         @include mobile {
             font-size: 1.5rem;
-            padding-right: 0;
-            padding-top: 1.8rem;
         }
     }
 
@@ -125,12 +124,10 @@ input:focus ~ label {
     font-size: 1.2rem;
     font-weight: $bold;
     background-color: transparent;
-    padding-top: 1rem;
+    padding: 0;
     
     @include mobile {
         font-size: 1.5rem;
-        padding-right: 0;
-        padding-top: 1.8rem;
     }
 }
 
