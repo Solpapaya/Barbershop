@@ -24,12 +24,14 @@
     }
 
     label:hover {
-        width: 50%;
-        margin-left: 35%;
+        width: 40%;
+        margin-left: 45%;
         color: $blue;
         font-size: 1.2rem;
         font-weight: $bold;
         background-color: transparent;
+        padding-top: 1rem;
+        // background-color: red;
         
         @include mobile {
             font-size: 1.5rem;
@@ -117,11 +119,13 @@ input:focus ~ .hover-border-2::before {
 
 input.selected ~ label,
 input:focus ~ label {
-    width: 50%;
-    margin-left: 35%;
+    width: 40%;
+    margin-left: 45%;
     color: $blue;
     font-size: 1.2rem;
+    font-weight: $bold;
     background-color: transparent;
+    padding-top: 1rem;
     
     @include mobile {
         font-size: 1.5rem;
