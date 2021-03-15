@@ -1,6 +1,6 @@
 function formAnimations() {
-    const timeLabel = document.querySelector('.field-time label');
-    const timeInput = document.querySelector('.field-time input');
+    const timeLabel = document.querySelector('.field-date-time label');
+    const timeInput = document.querySelector('.field-date-time input');
     
     timeInput.isFocus = false;
     timeInput.hasChanged = false;
@@ -49,7 +49,7 @@ function formAnimations() {
         }
     })
 
-    timeInput.addEventListener('change', function(e) {
+    timeInput.addEventListener('input', function(e) {
         this.hasChanged = true;
 
         const stringTime = e.currentTarget.value.split(":");
@@ -75,7 +75,7 @@ function validateTime(hour, minutes) {
 }
 
 function correctTime() {
-    const timeInput = document.querySelector('.field-time input');
+    const timeInput = document.querySelector('.field-date-time input');
     if(timeInput.classList.contains('wrong')) {
         timeInput.classList.remove('wrong');
         timeInput.classList.add('correct');
@@ -86,7 +86,7 @@ function correctTime() {
 }
 
 function wrongTime() {
-    const timeInput = document.querySelector('.field-time input');
+    const timeInput = document.querySelector('.field-date-time input');
     if(timeInput.classList.contains('correct')) {
         timeInput.classList.remove('correct');
         timeInput.classList.add('wrong');
