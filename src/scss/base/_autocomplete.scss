@@ -1,0 +1,12 @@
+/* Change autocomplete styles in WebKit */
+input{
+    &:-webkit-autofill {
+        // -webkit-text-fill-color: $green;
+        -webkit-box-shadow: 0 0 0 1000px #fff inset;
+    }
+    
+    &:-webkit-autofill::first-line {
+        font-family: $mainFont;
+        font-size: 1.6rem;
+    }
+}

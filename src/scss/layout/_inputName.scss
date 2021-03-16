@@ -38,6 +38,11 @@
         height: 100%;
         padding: 0 2rem;
         cursor: pointer;
+
+        // &:-webkit-autofill {
+        //     -webkit-text-fill-color: $green;
+        //     // -webkit-box-shadow: 0 0 0 1000px #fff inset;
+        // }
     }
 
     input::placeholder {
@@ -112,8 +117,6 @@
         font-weight: $bold;
     }
 
-    // input.wrong ~ .hover-border::before,
-    // input.wrong ~ .hover-border-2::before,
     input.selected ~ .hover-border::before,
     input.selected ~ .hover-border-2::before,
     input.correct ~ .hover-border::before,

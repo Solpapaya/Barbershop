@@ -20,12 +20,12 @@ function makeNameInput() {
     firstName.addEventListener('blur', function(e) {
         if(e.currentTarget.value === '') {
             this.setAttribute('placeholder', "Please insert First Name");   
-            unSelect(this);
             wrong(this);
+            unSelect(this);
         }
         else { 
-            unSelect(this);
             correct(this);
+            unSelect(this);
         }
     })
 
@@ -40,17 +40,18 @@ function makeNameInput() {
     lastName.addEventListener('blur', function(e) {
         if(e.currentTarget.value === '') {
             this.setAttribute('placeholder', "Please insert Last Name");   
-            unSelect(this);
             wrong(this);
+            unSelect(this);
         }
         else { 
-            unSelect(this);
             correct(this);
+            unSelect(this);
         }
     })
 }
 
 function select(input) {
+    input.style.webkitTextFillColor = "#000";
     if(!input.classList.contains('selected')) {
         input.classList.add('selected');
     }
@@ -68,6 +69,11 @@ function select(input) {
 function unSelect(input) {
     if(input.classList.contains('selected')) {
         input.classList.remove('selected');
+    }
+    if(input.classList.contains('correct')) {
+        input.style.webkitTextFillColor = "#65F200";
+    }else if(input.classList.contains('wrong')) {
+        input.style.webkitTextFillColor = "#F22439";
     }
 }
 
