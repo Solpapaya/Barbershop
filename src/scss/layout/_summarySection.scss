@@ -1,0 +1,26 @@
+#section-3 {
+    .message-container {
+        @include nineHundred {
+            margin-top: 2.68rem;
+            height: 30rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+    }
+
+    .icon-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+
+        i {
+            font-size: 5rem;
+            color: $white;
+        }
+    }
+}

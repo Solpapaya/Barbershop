@@ -1,5 +1,4 @@
 function formAnimations() {
-    // I have to add date input funcionality
     makeTimeInput();
     makeDateInput();    
     makeNameInput();

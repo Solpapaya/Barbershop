@@ -1,4 +1,11 @@
-let page = 2;
+let page = 3;
+
+const appointment = {
+    name: '',
+    date: '',
+    time: '',
+    services: []
+};
 
 document.addEventListener('DOMContentLoaded', () => {
     startApp();
@@ -9,6 +16,7 @@ function startApp() {
     createSectionBtn();
     showFirstSection();
     formAnimations();
+    showSummary();
 }
 
 async function showServices() {
@@ -130,4 +138,43 @@ function showSection() {
 
     newSection.classList.add('selected');
     newTabSection.classList.add('selected');
+}
+
+function showSummary() {
+    const summarySection = document.querySelector('#section-3');
+    const btnContainer = document.querySelector('#section-3 .button-container');
+
+    const iconContainer = createIcon();
+
+    const summaryMessageContainer = document.createElement('DIV');
+    const summaryMessage = document.createElement('P');
+
+    summaryMessageContainer.classList.add('message-container');
+
+    if(Object.values(appointment).includes('')) {
+        summaryMessage.textContent = "Ups! You are missing Client Info";
+    }else if(appointment.services.length === 0) {
+        summaryMessage.textContent = "Ups! You are missing Services";
+    }else if(Object.values(appointment).includes('') && appointment.services.length === 0) {
+        summaryMessage.textContent = "Ups! You are missing Clien Info & Services";
+    }else {
+        summaryMessage.textContent = "Appointment Summary";
+    }
+
+    summaryMessageContainer.appendChild(summaryMessage);
+    summaryMessageContainer.appendChild(iconContainer);
+
+    summarySection.insertBefore(summaryMessageContainer, btnContainer);
+}
+
+function createIcon() {
+    const iconContainer = document.createElement('DIV');
+    const icon = document.createElement('I');
+
+    iconContainer.classList.add('icon-container');
+    icon.classList.add('far', 'fa-frown');
+
+    iconContainer.appendChild(icon);
+
+    return iconContainer;
 }
