@@ -2,6 +2,93 @@ function formAnimations() {
     // I have to add date input funcionality
     makeTimeInput();
     makeDateInput();    
+    makeNameInput();
+}
+
+function makeNameInput() {
+    const firstName = document.querySelector('input[name=firstName]');
+    const lastName = document.querySelector('input[name=lastName]');
+
+    firstName.addEventListener('input', function(e) {
+        select(this);
+    })
+
+    firstName.addEventListener('focus', function(e) {
+        select(this);
+    })
+
+    firstName.addEventListener('blur', function(e) {
+        if(e.currentTarget.value === '') {
+            this.setAttribute('placeholder', "Please insert First Name");   
+            unSelect(this);
+            wrong(this);
+        }
+        else { 
+            unSelect(this);
+            correct(this);
+        }
+    })
+
+    lastName.addEventListener('input', function(e) {
+        select(this);
+    })
+
+    lastName.addEventListener('focus', function(e) {
+        select(this);
+    })
+
+    lastName.addEventListener('blur', function(e) {
+        if(e.currentTarget.value === '') {
+            this.setAttribute('placeholder', "Please insert Last Name");   
+            unSelect(this);
+            wrong(this);
+        }
+        else { 
+            unSelect(this);
+            correct(this);
+        }
+    })
+}
+
+function select(input) {
+    if(!input.classList.contains('selected')) {
+        input.classList.add('selected');
+    }
+    if(input.classList.contains('wrong')) {
+        input.classList.remove('wrong');
+        if(input.name === "firstName") {
+            input.setAttribute('placeholder', "First Name");
+        }else {
+            input.setAttribute('placeholder', "Last Name");
+        }
+    }
+    if(input.classList.contains('correct')) input.classList.remove('correct');
+}
+
+function unSelect(input) {
+    if(input.classList.contains('selected')) {
+        input.classList.remove('selected');
+    }
+}
+
+function selectInput(label, input, type) {
+    if(type === "time") label.textContent = "Opening hours 10:00 to 20:00";
+    else label.textContent = "Weekdays Only";
+    
+    if(input.classList.contains('chosen')) input.classList.remove('chosen');
+    if(!input.classList.contains('selected')) input.classList.add('selected');
+}
+
+function dateTransform(date) {
+    let newDate = date.split('-');
+    const year = newDate[0];
+    const month = newDate[1] - 1;
+    const day = newDate[2];
+    
+    newDate = new Date(year, month, day);
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+
+    return newDate.toLocaleDateString('en-US', options);
 }
 
 function makeDateInput() {
@@ -9,13 +96,13 @@ function makeDateInput() {
     const dateInput = document.querySelector('.field-date-time:nth-of-type(2) input');
 
     const today = new Date();
-    const todayString = new Date().toISOString().split('T');
+    const todayString = today.toLocaleDateString('pt-br').split( '/' ).reverse( ).join( '-' );
 
     const next3Months = new Date(today.setMonth(today.getMonth() + 3));
-    const next3MonthsString = next3Months.toISOString().split('T');
+    const next3MonthsString = next3Months.toLocaleDateString('pt-br').split( '/' ).reverse( ).join( '-' );
 
-    dateInput.setAttribute('min', todayString[0]);
-    dateInput.setAttribute('max', next3MonthsString[0]);
+    dateInput.setAttribute('min', todayString);
+    dateInput.setAttribute('max', next3MonthsString);
     
     dateInput.isFocus = false;
     dateInput.hasChanged = false;
@@ -60,6 +147,7 @@ function makeDateInput() {
 
     dateInput.addEventListener('blur', function() {
         this.isFocus = false;
+        this.hasChanged = true;
         if(this.mouseIsOver === false && dateLabel.mouseIsOver === false) {
             unSelectInput(dateLabel, dateInput, type);
         }
@@ -74,6 +162,11 @@ function makeDateInput() {
 function validateDate(e) {
     const input = document.querySelector('.field-date-time:nth-of-type(2) input');
 
+    const today = new Date();
+    const todayEdit = new Date();
+    const next3Months = new Date(todayEdit.setMonth(todayEdit.getMonth() + 3));
+
+
     const date = e.currentTarget.value.split('-')
     const year = date[0];
     const month = date[1] - 1;
@@ -81,7 +174,7 @@ function validateDate(e) {
 
     const appointmentDate = new Date(Date.UTC(year, month, day));
     const dayOfWeek = appointmentDate.getUTCDay();
-    if([6,0].includes(dayOfWeek)) {
+    if((year < today.getFullYear() || month < today.getMonth()) || (day < today.getDate() && month === today.getMonth()) || (month > next3Months.getMonth()) || (month === next3Months.getMonth() && day > next3Months.getDate()) || ([0,6].includes(dayOfWeek))) {
         wrong(input);
     }else {
         correct(input);
@@ -130,6 +223,8 @@ function makeTimeInput() {
 
     timeInput.addEventListener('focus', function(e) {
         this.isFocus = true;
+        this.hasChanged = true;
+
         selectInput(timeLabel, timeInput, type);
 
         const stringTime = e.currentTarget.value.split(":");
@@ -140,6 +235,7 @@ function makeTimeInput() {
 
     timeInput.addEventListener('blur', function() {
         this.isFocus = false;
+        this.hasChanged = true;
         if(this.mouseIsOver === false && timeLabel.mouseIsOver === false) {
             unSelectInput(timeLabel, timeInput, type);
         }
@@ -198,6 +294,7 @@ function unSelectInput(label, input, type) {
             if(type === 'date') label.textContent = dateTransform(input.value);
             else label.textContent = input.value;
         } else {
+            if(!input.classList.contains('wrong')) input.classList.add('wrong');
             if(type === "time") label.textContent = "Please select a valid Time";
             else label.textContent = "Please select a valid Date";
         }
@@ -207,21 +304,4 @@ function unSelectInput(label, input, type) {
         else label.textContent = "Date";
     }
     input.classList.remove('selected');
-}
-
-function dateTransform(date) {
-    const newDate = date.split('-');
-    const year = newDate[0];
-    const month = newDate[1];
-    const day = newDate[2];
-
-    return `${day}-${month}-${year}`;
-}
-
-function selectInput(timeLabel, timeInput, type) {
-    if(type === "time") timeLabel.textContent = "Opening hours 10:00 to 20:00";
-    else timeLabel.textContent = "Weekdays Only";
-    
-    if(timeInput.classList.contains('chosen')) timeInput.classList.remove('chosen');
-    if(!timeInput.classList.contains('selected')) timeInput.classList.add('selected');
 }

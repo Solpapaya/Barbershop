@@ -1,0 +1,146 @@
+.field-name{
+    @include fivefifty {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: $gap/4;
+    }
+
+    @include nineHundred {
+        display: block;
+    }
+
+    @include pc {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: $gap/4;
+    }
+
+    .name-container {
+        position: relative;
+        height: 5rem;
+        margin-top: $gap/2;
+
+        @include fivefifty {
+            margin-top: 0;
+        }
+
+        @include nineHundred {
+            margin-top: $gap/2;
+        }
+
+        @include pc {
+            margin-top: 0;
+        }
+    }
+
+    input {
+        width: 100%;
+        height: 100%;
+        padding: 0 2rem;
+        cursor: pointer;
+    }
+
+    input::placeholder {
+        color: $gray;
+    }
+
+    .hover-border::before {
+        position: absolute;
+        content: "";
+        left: 0;
+        top: 0;
+        height: 4px;
+        width: 0;
+        background-color: $blue;
+        transition: 1s;
+        z-index: 1;
+    }
+    
+    input:hover ~ .hover-border::before,
+    input:hover ~ .hover-border-2::before{
+        width: 100%;
+    }
+
+    .hover-border::after {
+        position: absolute;
+        content: "";
+        left: 0;
+        top: 0;
+        width: 4px;
+        height: 0;
+        background-color: $blue;
+        z-index: 1;
+        transition: 1s;
+    }
+
+    input:hover ~ .hover-border::after,
+    input:hover ~ .hover-border-2::after {
+        height: 100%;
+    }
+
+    .hover-border-2::before {
+        position: absolute;
+        content: "";
+        right: 0;
+        bottom: 0;
+        height: 4px;
+        width: 0;
+        background-color: $blue;
+        z-index: 1;
+        transition: 1s;
+    }
+
+    .hover-border-2::after {
+        position: absolute;
+        content: "";
+        right: 0;
+        bottom: 0;
+        height: 0;
+        width: 4px;
+        background-color: $blue;
+        z-index: 1;
+        transition: 1s;
+    }
+
+    input.wrong::placeholder {
+        color: $red;
+        font-weight: $bold;
+    }
+
+    input.correct {
+        color: $green;
+        font-weight: $bold;
+    }
+
+    // input.wrong ~ .hover-border::before,
+    // input.wrong ~ .hover-border-2::before,
+    input.selected ~ .hover-border::before,
+    input.selected ~ .hover-border-2::before,
+    input.correct ~ .hover-border::before,
+    input.correct ~ .hover-border-2::before {
+        width: 100%;
+    }
+
+    // input.wrong ~ .hover-border::after,
+    // input.wrong ~ .hover-border-2::after,
+    input.selected ~ .hover-border::after,
+    input.selected ~ .hover-border-2::after,
+    input.correct ~ .hover-border::after,
+    input.correct ~ .hover-border-2::after {
+        height: 100%;
+    }
+
+    input.wrong ~ .hover-border::before,
+    input.wrong ~ .hover-border-2::before,
+    input.wrong ~ .hover-border::after,
+    input.wrong ~ .hover-border-2::after {
+        background-color: $red;
+    }
+
+    input.correct ~ .hover-border::before,
+    input.correct ~ .hover-border-2::before,
+    input.correct ~ .hover-border::after,
+    input.correct ~ .hover-border-2::after {
+        background-color: $green;
+    }
+}

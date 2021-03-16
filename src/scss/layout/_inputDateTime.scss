@@ -1,5 +1,5 @@
 .field-date-time {
-    margin-top: 2rem;
+    margin-top: $gap/2;
     position: relative;
     width: 100%;
     height: 5rem;
@@ -15,6 +15,7 @@
     label {
         position: absolute;
         background-color: $white;
+        color: $gray;
         cursor: pointer;
         height: 100%;
         width: 100%;
@@ -96,63 +97,68 @@
         z-index: 1;
         transition: 1s;
     }
-}
 
-input.selected ~ .hover-border::after,
-input.selected ~ .hover-border-2::after,
-input:focus ~ .hover-border::after,
-input:focus ~ .hover-border-2::after {
-    height: 100%;
-}
+    input.selected ~ .hover-border::after,
+    input.selected ~ .hover-border-2::after,
+    input:focus ~ .hover-border::after,
+    input:focus ~ .hover-border-2::after,
+    input.correct ~ .hover-border::after,
+    input.correct ~ .hover-border-2::after {
+        height: 100%;
+    }
 
-input.selected ~ label {
-    font-weight: $bold;
-}
+    input.selected ~ label {
+        font-weight: $bold;
+    }
 
-input.selected ~ .hover-border::before,
-input.selected ~ .hover-border-2::before,
-input:focus ~ .hover-border::before,
-input:focus ~ .hover-border-2::before {
-    width: 100%;
-}
+    input.selected ~ .hover-border::before,
+    input.selected ~ .hover-border-2::before,
+    input:focus ~ .hover-border::before,
+    input:focus ~ .hover-border-2::before,
+    input.correct ~ .hover-border::before,
+    input.correct ~ .hover-border-2::before {
+        width: 100%;
+    }
 
-input.selected ~ label,
-input:focus ~ label {
-    width: 40%;
-    margin-left: 45%;
-    color: $blue;
-    font-size: 1.2rem;
-    font-weight: $bold;
-    background-color: transparent;
-    padding: 0;
-    
-    @include mobile {
-        font-size: 1.5rem;
+    input.selected ~ label,
+    input:focus ~ label {
+        width: 40%;
+        margin-left: 45%;
+        color: $blue;
+        font-size: 1.2rem;
+        font-weight: $bold;
+        background-color: transparent;
+        padding: 0;
+        
+        @include mobile {
+            font-size: 1.5rem;
+        }
+    }
+
+    input.correct ~ .hover-border::before,
+    input.correct ~ .hover-border-2::before,
+    input.correct ~ .hover-border::after,
+    input.correct ~ .hover-border-2::after {
+        background-color: $green;
+    }
+
+    input.correct ~ label {
+        color: $green !important;
+    }
+
+    input.wrong ~ .hover-border::before,
+    input.wrong ~ .hover-border-2::before,
+    input.wrong ~ .hover-border::after,
+    input.wrong ~ .hover-border-2::after {
+        background-color: $red;
+    }
+
+    input.wrong ~ label {
+        color: $red !important;
+    }
+
+    input.chosen ~ label {
+        font-weight: $bold;
     }
 }
 
-input.correct ~ .hover-border::before,
-input.correct ~ .hover-border-2::before,
-input.correct ~ .hover-border::after,
-input.correct ~ .hover-border-2::after {
-    background-color: $green;
-}
-
-input.correct ~ label {
-    color: $green !important;
-}
-
-input.wrong ~ .hover-border::before,
-input.wrong ~ .hover-border-2::before,
-input.wrong ~ .hover-border::after,
-input.wrong ~ .hover-border-2::after {
-    background-color: $red;
-}
-
-input.wrong ~ label {
-    color: $red !important;
-}
-
-input.chosen ~ label {
-    font-weight: $bold;
-}

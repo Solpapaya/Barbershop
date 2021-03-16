@@ -4,8 +4,14 @@
     }
 }
 
-@mixin threesixtytwo {
-    @media(min-width: 362) {
+@mixin fivefifty {
+    @media(min-width: 550px) {
+        @content;
+    }
+}
+
+@mixin pc {
+    @media (min-width: 1048px) {
         @content;
     }
 }
