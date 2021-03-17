@@ -142,9 +142,9 @@
         background-color: $green;
     }
 
-    input.correct ~ label {
-        color: $green !important;
-    }
+    // input.correct ~ label {
+    //     color: $green !important;
+    // }
 
     input.wrong ~ .hover-border::before,
     input.wrong ~ .hover-border-2::before,

@@ -1,11 +1,21 @@
-let page = 3;
+let page = 1;
+
+// const appointment = {
+//     firstName: 'Daniel Rafael',
+//     lastName: 'Solorio Paredes',
+//     date: 'Monday 15, March 2021',
+//     time: '12:30',
+//     services: [{name: "Men's Haircut", price: "80"}, {name: "Nails", price: "400"}]
+// };
 
 const appointment = {
-    name: '',
+    firstName: '',
+    lastName: '',
     date: '',
     time: '',
     services: []
 };
+
 
 document.addEventListener('DOMContentLoaded', () => {
     startApp();
@@ -16,7 +26,7 @@ function startApp() {
     createSectionBtn();
     showFirstSection();
     formAnimations();
-    showSummary();
+    createSummary();
 }
 
 async function showServices() {
@@ -42,8 +52,10 @@ async function showServices() {
             serv.addEventListener('click', (event) => {
                 if(event.currentTarget.classList.contains('selected')) {
                     event.currentTarget.classList.remove('selected');
+                    updateAppointment(event.currentTarget, 'services', false);
                 }else {
                     event.currentTarget.classList.add('selected');
+                    updateAppointment(event.currentTarget, 'services');
                 }
             });
 
@@ -138,9 +150,25 @@ function showSection() {
 
     newSection.classList.add('selected');
     newTabSection.classList.add('selected');
+
+    if(page == 3) {
+        updateSummary();
+    }
 }
 
-function showSummary() {
+function createSummary() {
+    const appointmentDetails = document.querySelector('.appointment-details');
+    const serviceDetails = document.querySelector('.service-details');
+    const totalPrice = document.querySelector('.total-price');
+
+    appointmentDetails.classList.add('no-display');
+    serviceDetails.classList.add('no-display');
+    totalPrice.classList.add('no-display');
+
+    createSummaryMessage();
+}
+
+function createSummaryMessage() {
     const summarySection = document.querySelector('#section-3');
     const btnContainer = document.querySelector('#section-3 .button-container');
 
@@ -151,14 +179,15 @@ function showSummary() {
 
     summaryMessageContainer.classList.add('message-container');
 
-    if(Object.values(appointment).includes('')) {
-        summaryMessage.textContent = "Ups! You are missing Client Info";
+    if(Object.values(appointment).includes('') && appointment.services.length === 0) {
+        summaryMessage.textContent = "Ups! You are missing Client Info & Services";
     }else if(appointment.services.length === 0) {
         summaryMessage.textContent = "Ups! You are missing Services";
-    }else if(Object.values(appointment).includes('') && appointment.services.length === 0) {
-        summaryMessage.textContent = "Ups! You are missing Clien Info & Services";
+    }else if(Object.values(appointment).includes('')) {
+        summaryMessage.textContent = "Ups! You are missing Client Info";
     }else {
-        summaryMessage.textContent = "Appointment Summary";
+        summaryMessageContainer.classList.add('no-display');
+        showSummary();
     }
 
     summaryMessageContainer.appendChild(summaryMessage);
@@ -177,4 +206,91 @@ function createIcon() {
     iconContainer.appendChild(icon);
 
     return iconContainer;
+}
+
+function updateSummary() {
+    const appointmentDetails = document.querySelector('.appointment-details');
+    const serviceDetails = document.querySelector('.service-details');
+    const totalPrice = document.querySelector('.total-price');
+
+    if(!appointmentDetails.classList.contains('no-display')) {
+        appointmentDetails.classList.add('no-display');
+        serviceDetails.classList.add('no-display');
+        totalPrice.classList.add('no-display');
+    }
+
+    const summaryMessage = document.querySelector('.message-container p');
+    const messageContainer = document.querySelector('.message-container');
+
+    if(messageContainer.classList.contains('no-display')) messageContainer.classList.remove('no-display');
+
+    if(Object.values(appointment).includes('') && appointment.services.length === 0) {
+        summaryMessage.textContent = "Ups! You are missing Client Info & Services";
+    }else if(appointment.services.length === 0) {
+        summaryMessage.textContent = "Ups! You are missing Services";
+    }else if(Object.values(appointment).includes('')) {
+        summaryMessage.textContent = "Ups! You are missing Client Info";
+    }else {
+        messageContainer.classList.add('no-display');
+        showSummary();
+    }
+}
+
+function showSummary() {
+    // Shows the Appointment Details
+    const appointmentDetails = document.querySelector('.appointment-details');
+    appointmentDetails.classList.remove('no-display');
+
+    const detailContent = document.querySelectorAll('.detail-content');
+
+    detailContent[0].textContent = `${appointment.firstName} ${appointment.lastName}`
+    detailContent[1].textContent = appointment.date;
+    detailContent[2].textContent = appointment.time;
+
+    // Shows the Service Details
+    const serviceDetails = document.querySelector('.service-details');
+    serviceDetails.classList.remove('no-display');
+
+    const services = document.querySelectorAll('.service-detail');
+    services.forEach(service => {
+        service.remove();
+    });
+    
+    appointment.services.forEach(service => {
+        const {name, price} = service;
+
+        const container = document.createElement('DIV');
+        container.classList.add('service-detail');
+
+        const nameService = document.createElement('P');
+        nameService.classList.add('name-service');
+        nameService.textContent = name;
+
+        const priceService = document.createElement('P');
+        priceService.classList.add('price-service');
+        priceService.textContent = `$${price}`;
+
+        container.appendChild(nameService);
+        container.appendChild(priceService);
+
+        serviceDetails.appendChild(container);
+    });
+
+    // Shows the Total Price
+    const totalPrice = document.querySelector('.total-price');
+    totalPrice.classList.remove('no-display');
+
+    let total = 0;
+    appointment.services.forEach(service => {
+        total += parseInt(service.price);
+    })
+
+    const totalLabel = document.querySelector('.total-price .total-label');
+    totalLabel.textContent = "Total:";
+
+    const price = document.querySelector('.total-price .price');
+    price.textContent = `$${total}`;
+
+    totalPrice.appendChild(totalLabel);
+    totalPrice.appendChild(price);
 }

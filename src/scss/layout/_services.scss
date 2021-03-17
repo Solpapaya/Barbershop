@@ -13,8 +13,12 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: $gap/2 0;
+    padding: $gap/4 0;
     cursor: pointer;
+
+    @include mobile {
+        padding: $gap/2 0;
+    }
 
     &:not(:last-of-type) {
         margin-bottom: $gap/2;
@@ -33,9 +37,13 @@
     .service__price {
         color: $blue;
         font-weight: $bold;
-        font-size: 3rem;
+        font-size: 2rem;
         margin-top: 1rem;
         margin-bottom: 0;
+
+        @include mobile {
+            font-size: 3rem;
+        }
     }
 
     &.selected {

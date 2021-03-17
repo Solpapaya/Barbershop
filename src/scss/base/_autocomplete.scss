@@ -8,5 +8,6 @@ input{
     &:-webkit-autofill::first-line {
         font-family: $mainFont;
         font-size: 1.6rem;
+        // font-weight: $bold;
     }
 }

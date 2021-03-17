@@ -11,16 +11,134 @@
         p {
             margin-bottom: 1rem;
         }
+
+        .icon-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+    
+            i {
+                font-size: 5rem;
+                color: $white;
+            }
+        }
     }
 
-    .icon-container {
-        width: 100%;
-        display: flex;
-        justify-content: center;
+    .message-container.no-display {
+        display: none;
+    }
+}
 
-        i {
-            font-size: 5rem;
-            color: $white;
+.appointment-details {
+    &.no-display {
+        display: none;
+    }
+
+    .appointment-detail {
+        margin-top: $gap/2;
+        display: grid;
+        grid-template-columns: 1.5fr 5fr;
+        align-items: baseline;
+        column-gap: $gap/6;
+
+        @include mobile {
+            column-gap: $gap/2;
+        }
+
+        .detail-field {
+            display: flex;
+            justify-content: flex-end;
+            font-size: 1.8rem;
+            color: $blue;
+            font-weight: $bold;
+
+            @include mobile {
+                font-size: 2.4rem;
+            }
+        }
+
+        p {
+            margin: 0;
+        }
+
+        .detail-content {
+            display: flex;
+            justify-content: flex-start;
+            font-size: 1.6rem;
+
+            @include mobile {
+                font-size: 2rem;
+            }
+        }
+    }
+}
+
+.service-details {
+    &.no-display {
+        display: none;
+    }
+
+    .service-detail {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        border-top: 1px solid $gray;
+        padding: $gap/4 0;
+
+        &:last-of-type {
+            border-bottom: 1px solid $gray;
+        }
+    }
+
+    p {
+        margin: 0;
+    }
+
+    .name-service {
+        font-size: 1.6rem;
+
+        @include mobile {
+            font-size: 2rem;
+        }
+    }
+
+    .price-service {
+        margin-top: $gap/4;
+        color: $blue;
+        font-weight: $bold;
+        font-size: 1.8rem;
+
+        @include mobile {
+            font-size: 2rem;
+        }
+    }
+}
+
+.total-price {
+    display: flex;
+    justify-content: flex-end;
+    align-items: baseline;
+
+    &.no-display {
+        display: none;
+    }
+
+    .total-label {
+        color: $blue;
+        font-weight: $bold;
+        font-size: 1.8rem;
+
+        @include mobile {
+            font-size: 2rem;
+        }
+    }
+
+    .price {
+        margin-left: 1rem;
+        font-size: 1.6rem;
+
+        @include mobile {
+            font-size: 2rem;
         }
     }
 }

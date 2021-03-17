@@ -10,6 +10,7 @@ function makeNameInput() {
 
     firstName.addEventListener('input', function(e) {
         select(this);
+        updateAppointment(this, 'firstName');
     })
 
     firstName.addEventListener('focus', function(e) {
@@ -30,6 +31,7 @@ function makeNameInput() {
 
     lastName.addEventListener('input', function(e) {
         select(this);
+        updateAppointment(this, 'lastName');
     })
 
     lastName.addEventListener('focus', function(e) {
@@ -47,6 +49,26 @@ function makeNameInput() {
             unSelect(this);
         }
     })
+}
+
+function updateAppointment(input, property, isCorrect = true) {
+    if(isCorrect) {
+        if(property === 'date') appointment[property] = dateTransform(input.value);
+        else if(property === 'services') {
+            const serviceArray = input.textContent.split('$');
+            const service = {name: serviceArray[0], price: serviceArray[1]};
+            appointment[property].push(service);
+        }
+        else appointment[property] = input.value;
+    }
+    else {
+        if(property === 'services') {
+            const serviceName = input.textContent.split('$')[0];
+            appointment[property] = appointment[property].filter(service => service.name !== serviceName);
+        }else {
+            appointment[property] = '';  
+        }
+    } 
 }
 
 function select(input) {
@@ -70,7 +92,7 @@ function unSelect(input) {
         input.classList.remove('selected');
     }
     if(input.classList.contains('correct')) {
-        input.style.webkitTextFillColor = "#65F200";
+        input.style.webkitTextFillColor = "#808080";
     }else if(input.classList.contains('wrong')) {
         input.style.webkitTextFillColor = "#F22439";
     }
@@ -181,8 +203,11 @@ function validateDate(e) {
     const dayOfWeek = appointmentDate.getUTCDay();
     if((year < today.getFullYear() || month < today.getMonth()) || (day < today.getDate() && month === today.getMonth()) || (month > next3Months.getMonth()) || (month === next3Months.getMonth() && day > next3Months.getDate()) || ([0,6].includes(dayOfWeek))) {
         wrong(input);
+        updateAppointment(input, 'date', false);
+
     }else {
         correct(input);
+        updateAppointment(input, 'date');
     }
 }
 
@@ -261,14 +286,18 @@ function validateTime(hour, minutes) {
     const input = document.querySelector('.field-date-time:nth-of-type(3) input');
     if(hour >= 10 && hour <= 19 ) {
         correct(input);
+        updateAppointment(input, 'time');
     }else if(hour === 20) {
         if(minutes > 0) {
             wrong(input);
+            updateAppointment(input, 'time', false);
         }else {
             correct(input);
+            updateAppointment(input, 'time');
         }
     }else {
         wrong(input);
+        updateAppointment(input, 'time', false);
     }
 }
 
