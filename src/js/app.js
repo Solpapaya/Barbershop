@@ -1,13 +1,5 @@
 let page = 1;
 
-// const appointment = {
-//     firstName: 'Daniel Rafael',
-//     lastName: 'Solorio Paredes',
-//     date: 'Monday 15, March 2021',
-//     time: '12:30',
-//     services: [{name: "Men's Haircut", price: "80"}, {name: "Nails", price: "400"}]
-// };
-
 const appointment = {
     firstName: '',
     lastName: '',

@@ -10,7 +10,8 @@ function makeNameInput() {
 
     firstName.addEventListener('input', function(e) {
         select(this);
-        updateAppointment(this, 'firstName');
+        if(e.currentTarget.value.trim() === '') updateAppointment(this, 'firstName', false);
+        else updateAppointment(this, 'firstName');
     })
 
     firstName.addEventListener('focus', function(e) {
@@ -18,8 +19,9 @@ function makeNameInput() {
     })
 
     firstName.addEventListener('blur', function(e) {
-        if(e.currentTarget.value === '') {
+        if(e.currentTarget.value.trim() === '') {
             this.setAttribute('placeholder', "Please insert First Name");   
+            this.value = "Please insert First Name";
             wrong(this);
             unSelect(this);
         }
@@ -31,7 +33,8 @@ function makeNameInput() {
 
     lastName.addEventListener('input', function(e) {
         select(this);
-        updateAppointment(this, 'lastName');
+        if(e.currentTarget.value.trim() === '') updateAppointment(this, 'lastName', false);
+        else updateAppointment(this, 'lastName');
     })
 
     lastName.addEventListener('focus', function(e) {
@@ -39,8 +42,9 @@ function makeNameInput() {
     })
 
     lastName.addEventListener('blur', function(e) {
-        if(e.currentTarget.value === '') {
+        if(e.currentTarget.value.trim() === '') {
             this.setAttribute('placeholder', "Please insert Last Name");   
+            this.value = "Please insert Last Name";
             wrong(this);
             unSelect(this);
         }
@@ -57,7 +61,8 @@ function updateAppointment(input, property, isCorrect = true) {
         else if(property === 'services') {
             const serviceArray = input.textContent.split('$');
             const service = {name: serviceArray[0], price: serviceArray[1]};
-            appointment[property].push(service);
+            // appointment[property].push(service); -> Not recommended to modify original data
+            appointment[property] = [...appointment[property], service];
         }
         else appointment[property] = input.value;
     }
@@ -78,6 +83,7 @@ function select(input) {
     }
     if(input.classList.contains('wrong')) {
         input.classList.remove('wrong');
+        input.value = "";
         if(input.name === "firstName") {
             input.setAttribute('placeholder', "First Name");
         }else {
@@ -204,7 +210,6 @@ function validateDate(e) {
     if((year < today.getFullYear() || month < today.getMonth()) || (day < today.getDate() && month === today.getMonth()) || (month > next3Months.getMonth()) || (month === next3Months.getMonth() && day > next3Months.getDate()) || ([0,6].includes(dayOfWeek))) {
         wrong(input);
         updateAppointment(input, 'date', false);
-
     }else {
         correct(input);
         updateAppointment(input, 'date');

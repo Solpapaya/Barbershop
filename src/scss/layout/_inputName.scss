@@ -117,6 +117,11 @@
         font-weight: $bold;
     }
 
+    input.wrong {
+        color: $red;
+        font-weight: $bold;
+    }
+
     input.selected ~ .hover-border::before,
     input.selected ~ .hover-border-2::before,
     input.correct ~ .hover-border::before,
