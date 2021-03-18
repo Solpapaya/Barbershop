@@ -39,6 +39,9 @@
         padding: 0 2rem;
         cursor: pointer;
 
+        border-radius: 0;
+        -webkit-appearance: none;
+
         // &:-webkit-autofill {
         //     -webkit-text-fill-color: $green;
         //     // -webkit-box-shadow: 0 0 0 1000px #fff inset;
@@ -47,6 +50,9 @@
 
     input::placeholder {
         color: $gray;
+        display: flex;
+        align-items: center;
+        line-height: normal;
     }
 
     .hover-border::before {

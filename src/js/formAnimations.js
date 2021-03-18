@@ -136,6 +136,8 @@ function makeDateInput() {
 
     dateInput.setAttribute('min', todayString);
     dateInput.setAttribute('max', next3MonthsString);
+
+    if(iOS()) dateInput.value = todayString;
     
     dateInput.isFocus = false;
     dateInput.hasChanged = false;
@@ -176,6 +178,7 @@ function makeDateInput() {
     dateInput.addEventListener('focus', function(e) {
         this.isFocus = true;
         selectInput(dateLabel, dateInput, type);
+        if(iOS()) validateDate(e);
     });
 
     dateInput.addEventListener('blur', function() {
@@ -190,6 +193,19 @@ function makeDateInput() {
         this.hasChanged = true;
         validateDate(e);
     })
+}
+
+function iOS() {
+    return [
+      'iPad Simulator',
+      'iPhone Simulator',
+      'iPod Simulator',
+      'iPad',
+      'iPhone',
+      'iPod'
+    ].includes(navigator.platform)
+    // iPad on iOS 13 detection
+    || (navigator.userAgent.includes("Mac") && "ontouchend" in document)
 }
 
 function validateDate(e) {
